@@ -1,12 +1,14 @@
 ## Build your own Node.js webhook!
 
-Nowadays Webhooks are seen probably everywhere around dev community. A lot of companies use them (e.g. [Github](https://developer.github.com/webhooks/), [Mailchimp](https://mailchimp.com/developer/guides/about-webhooks/), [Shopify](https://help.shopify.com/en/api/reference/events/webhook) and even [PayPal](https://developer.paypal.com/docs/integration/direct/webhooks/)). And they definitely should! Now, handling them is pretty easy: you just dive into the documentation and set up a listener of their webhook. But what about creating your own one? In this tutorial we are going to build a simple login form, and, thanks to webhooks, create a new file on other server with user data.
+Nowadays Webhooks are seen probably everywhere around the dev community. A lot of companies use them (take a look at [Github](https://developer.github.com/webhooks/), [Mailchimp](https://mailchimp.com/developer/guides/about-webhooks/), [Shopify](https://help.shopify.com/en/api/reference/events/webhook) and even [PayPal](https://developer.paypal.com/docs/integration/direct/webhooks/)). And they definitely should! Now, handling them is pretty easy: you just dive into the documentation and set up a listener of their webhook. But what about creating your own one? 
 
-Disclaimer: this application is only intented to show how webhooks work and what you can do with them. You might want to have a different architecture approach in production.
+In this tutorial we are going to build a simple login form, and, thanks to webhooks, create a new file on another server with user data. You can image such functionality on any website that has a user login.
+
+Disclaimer: this demo project is only intented to show how webhooks work and what you can do with them. You might want to have a different architecture approach in production.
 
 ### So what are webhooks anyway?
 
-Imagine you are playing soccer in an international team. And hudreds, thousands of people are watching you. They also make attention to another person - a football commentator. Every time you do something (like having a score or turning right) - he informs your viewers of what is happening on a field. He is the webhook. You are the main server and your viewers are other servers that are connected to webhook - I prefer to call them listeners. Think of webhooks like notifications. Btw, they are also might be created using webhooks.
+Imagine you are playing soccer in an international team. And hundreds, thousands of people are watching you. They also make attention to another person - a football commentator. Every time you do something (like having a score or turning right) - he informs your viewers of what is happening on a field. He is the webhook. You are the main server and your viewers are other servers that are connected to webhook - I prefer to call them listeners. Think of webhooks like notifications. Btw, they are also might be created using webhooks.
 
 ### Now, let's begin
 
@@ -34,13 +36,13 @@ Our project will be structured like this:
 └── package.json
 ```
 
-We got four servers: client (for showing users the frontend part), client-api (our pre-setup backend), webhook and webhook listener (tottaly another server, that only knows what the user has done via webhook).
+We got four servers: client (for showing users the frontend part), client-api (our pre-setup backend), webhook and webhook listener (totally another server, that only knows what the user has done via webhook).
 
-You might want to check the repo at [this page](https://github.com/berezovskycom/simple-webhook).
+If you want, you can check the repo with the demo project at [this page](https://github.com/berezovskycom/simple-webhook).
 
 ### Front-end
 
-In this tutorial we will use our good old plain html for markup and JavaScript for handling the request.
+Not let's talk a bit about front-end part. In this tutorial we will use our good old plain html for markup and JavaScript for handling the request.
 
 ```
 <!--- index.html --->
@@ -55,7 +57,7 @@ In this tutorial we will use our good old plain html for markup and JavaScript f
     <script src="js/app.js"></script>
 ```
 
-And JavaScript
+And JavaScript, of course:
 
 ```
 // app.js
@@ -127,7 +129,9 @@ The functionality is pretty basic: we set up two inputs, and after clicking on a
 
 We start from serving our page on a client server. In each of our servers we use [fetch](https://www.npmjs.com/package/node-fetch) for handling requests, [bodyparser](https://www.npmjs.com/package/body-parser) for parsing the data we get and send.
 
-> [fetch](https://www.npmjs.com/package/node-fetch) is a must-have JavaScript API to learn! [Visit MDN docs for more information](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). 
+> [fetch](https://www.npmjs.com/package/node-fetch) is a must-have JavaScript API to learn! [Visit MDN docs for more information](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+Now, here is how it looks in code:
 
 ```
 // client-server/index.js
@@ -231,7 +235,7 @@ app.listen(2001);
 
 Here, we got a route for working with the data that we got from our client and notifying the webhook what has been done. Notice how we mutate an object to send - we use tree dots a.k.a ['the spread operator'](https://dev.to/sagar/three-dots---in-javascript-26ci) to pass all object properties to a new object. This pattern is highly used in Redux, when working with [Reducers](https://css-tricks.com/understanding-how-reducers-are-used-in-redux/).
 
-### And... cherry on top!
+### And... the cherry on top!
 
 Our webhook code looks like this:
 
