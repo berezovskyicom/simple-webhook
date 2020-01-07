@@ -1,11 +1,8 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const app = express();
-
-const mainServer = 'http://localhost:2001';
-const webHookAdress = 'http://localhost:2002';
 
 const listeningServer = 'http://localhost:2003';
 
@@ -15,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+// send notifications to preconnected servers
 async function notifySomeServer(serverHost, data) {
 
     await fetch(
@@ -34,7 +32,7 @@ async function notifySomeServer(serverHost, data) {
 
 }
 
-// simulate post
+// default route for handling the data that we got from out client-api server
 app.post('/', (req, res) => {
 
     const body = JSON.stringify({

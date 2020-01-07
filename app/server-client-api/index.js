@@ -40,6 +40,7 @@ app.post('/user/create', (req, res) => {
     notifyWebhook(JSON.stringify({
         ...req.body,
         id,
+        action: 'user_create',
         host: req.hostname + req.path,
     }));
 
