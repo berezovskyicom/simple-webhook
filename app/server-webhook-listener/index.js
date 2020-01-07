@@ -6,9 +6,6 @@ const path = require('path');
 
 const app = express();
 
-const mainServer = 'http://localhost:2001';
-const webHookAdress = 'http://localhost:2002';
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
  
