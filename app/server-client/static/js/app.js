@@ -1,36 +1,22 @@
 
 const initRequest = (
-    type,
+    method,
     url,
     body,
     cb = (f) => f,
 ) => {
-    // 1. Create a new XMLHttpRequest object
-    let xhr = new XMLHttpRequest();
-
-    // 2. Configure it: GET-request for the URL /article/.../load
-    xhr.open(type, url);
-
-    // 3. Add header for sending data as JSON
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
-    // 4. Send the request over the network
-    xhr.send(body);
-
-    // 5. This will be called after the response is received
-    xhr.onload = function() {
-        if (xhr.status != 200) { // analyze HTTP status of the response
-            console.error(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
-        } else { // show the result
-            cb(JSON.parse(xhr.response).id);
+    fetch(
+        url,
+        {
+            method,
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }
-    };
-
-    // 6. Handle errors
-    xhr.onerror = () => {
-        console.log('Request failed');
-    };
-}
+    ).then(res => res.json()
+    ).then(body => cb(body.id))
+};
 
 // 7. Handle page markup after sending the request successfully
 const showSuccess = (id) => {

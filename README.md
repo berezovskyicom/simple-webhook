@@ -64,23 +64,27 @@ The functionality is pretty basic: we set up two inputs, and after clicking on a
 And JavaScript
 
 ```
-const initRequest = (type, url, body, cb) => {
- let xhr = new XMLHttpRequest();
- xhr.open(type, url);
- xhr.setRequestHeader('Content-Type', 'application/json');
- xhr.send(body);
- xhr.onload = () => {
- if (xhr.status != 200) {
- console.error(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
- } else {
- cb(JSON.parse(xhr.response).id);
- }
- };
- xhr.onerror = () => console.log('Request failed');
-}
+const initRequest = (
+    method,
+    url,
+    body,
+    cb = (f) => f,
+) => {
+    fetch(
+        url,
+        {
+            method,
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+    ).then(res => res.json()
+    ).then(body => cb(body.id))
+};
 ```
 
-In initRequest(), we use XMLHttpRequest object to interact with server. When using XMLHttpRequest, don't forget about setting the request header, so you will not have any problems with parsing down the data on the server. For further information about XMLHttpRequest, please refer to [javascript.info article](https://javascript.info/xmlhttprequest).
+In initRequest(), we use fetch to interact with server. When using fetch, don't forget about setting the request header, so you will not have any problems with parsing down the data on the server.
 
 Besides, as you might have noticed, we intentionally use the callback technique: when initRequest has finished executing - run the cb() function.
 
@@ -211,8 +215,10 @@ app.post('/', (req, res) => {
  ...req.body,
  sent_to_server: true,
  });
- notifySomeServer(listeningServer, body) // 'http://localhost:2003'
- .then(() => console.log('sent to listening server'));
+ listeningServers.forEach(listeningServer => {
+    notifySomeServer(listeningServer, body)
+        .then(() => console.log('sent to listening server'));
+ })
  res.send({ action: 'done' });
 })
 

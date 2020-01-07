@@ -26,7 +26,7 @@ async function notifyWebhook(data) {
         }
     ).then(
         () => console.log(`sent to ${webHookAdress}`)
-    )
+    );
 
 }
 

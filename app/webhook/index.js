@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const listeningServer = 'http://localhost:2003';
+const listeningServers = ['http://localhost:2003'];
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -40,8 +40,10 @@ app.post('/', (req, res) => {
         sent_to_server: true,
     });
     
-    notifySomeServer(listeningServer, body)
-        .then(() => console.log('sent to listening server'));
+    listeningServers.forEach(listeningServer => {
+        notifySomeServer(listeningServer, body)
+            .then(() => console.log('sent to listening server'));
+    })
 
     res.send({ action: 'done' });
 })
