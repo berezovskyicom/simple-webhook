@@ -2,9 +2,9 @@
 
 ![Webhook Visual Representation](https://github.com/berezovskycom/simple-webhook/blob/master/docs/webhooks-ixon-cloud.jpg)
 
-Nowadays Webhooks are seen probably everywhere around dev community. A lot of companies use them (e.g. [Github](https://developer.github.com/webhooks/), [Mailchimp](https://mailchimp.com/developer/guides/about-webhooks/) (for signing up users from your website to your newsletter), [Shopify](https://help.shopify.com/en/api/reference/events/webhook) (offers webhooks to keep parts of your commerce system up-to-date, so you don’t have to enter new transaction details manually) and even [PayPal](https://developer.paypal.com/docs/integration/direct/webhooks/)) (to tell your accounting app when your clients pay you). And they definitely should! Now, handling them is pretty easy: you just dive into the documentation and set up a listener of their webhook. But what about creating your own one? In this tutorial we are going to build a simple login form, and, thanks to webhooks, create a new file on other server with user data.
+Nowadays Webhooks are seen probably everywhere around dev community. A lot of companies use them (e.g. [Github](https://developer.github.com/webhooks/), [Mailchimp](https://mailchimp.com/developer/guides/about-webhooks/) (for signing up users from your website to your newsletter), [Shopify](https://help.shopify.com/en/api/reference/events/webhook) (offers webhooks to keep parts of your commerce system up-to-date, so you don’t have to enter new transaction details manually) and even [PayPal](https://developer.paypal.com/docs/integration/direct/webhooks/) (to tell your accounting app when your clients pay you). And they definitely should! Now, handling them is pretty easy: you just dive into the documentation and set up a listener of their webhook. But what about creating your own one? In this tutorial we are going to build a simple login form, and, thanks to webhooks, create a new file on other server with user data.
 
-Disclaimer: this application is only intented to show how webhooks work and what you can do with them. You might want to have a different architecture approach in production.
+> Disclaimer: this application is only intented to show how webhooks work and what you can do with them. You might want to have a different architecture approach in production.
 
 ### So what are webhooks anyway?
 
@@ -115,7 +115,7 @@ const showSuccess = (id) => {
     `;
     document.forms.addUser.appendChild(span);
 }
-
+```
 
 ### Our backend story begins..
 
