@@ -180,7 +180,7 @@ app.post('/user/create', (req, res) => {
 app.listen(2001);
 ```
 
-Here, we got a route for working with the data that we got from our client and notifying the webhook what has been done. Notice how we mutate an object to send - we use tree dots a.k.a ['the spread operator'](https://dev.to/sagar/three-dots---in-javascript-26ci) to pass all object properties to a new object. This pattern is highly used in Redux when working with [Reducers](https://css-tricks.com/understanding-how-reducers-are-used-in-redux/).
+Here, we got a route for working with the data that we got from our client and notifying the webhook what has been done. Notice how we mutate an object to send - we use three dots a.k.a ['the spread operator'](https://dev.to/sagar/three-dots---in-javascript-26ci) to pass all object properties to a new object. This pattern is highly used in Redux when working with [Reducers](https://css-tricks.com/understanding-how-reducers-are-used-in-redux/).
 
 ### And... cherry on top!
 
